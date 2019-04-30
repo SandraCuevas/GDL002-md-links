@@ -1,40 +1,33 @@
 const mdLinks = require('../src/md-links.js');
 
-describe('mdLinks', ()=>{
-  it('is an object', ()=>{
-    expect(typeof mdLinks).toBe('object');
-  });
+
+describe('mdLinks', () => {
+    it('is an object', () => {
+        expect(typeof mdLinks).toBe('object');
+    });
 });
 
-describe('existPath', ()=>{
-  it('is a function', ()=>{  
-    expect(typeof mdLinks.existPath).toBe('function');
-  });
+describe('fieldFill', () => {
+    it('is a function', () => {
+        expect(typeof mdLinks.fieldFill).toBe('function');
+    });
 });
 
-describe('findMd', ()=>{
-  it('is a function', ()=>{  
-    expect(typeof mdLinks.findMd).toBe('function');
-  });
+describe('isApath', () => {
+    it('is a function', () => {
+        expect(typeof mdLinks.isApath).toBe('function');
+    });
 });
 
-describe('readMd', ()=>{
-  it('is a function', ()=>{  
-    expect(typeof mdLinks.readMd).toBe('function');
-  });
-});
-
-describe('readMd', ()=>{
-  it('should read a file', ()=>{
-    expect(mdLinks.readMd('./README.md')).toBe(true);
-  });
+describe('dirPath', () => {
+    it('should be true', () => {
+        expect(mdLinks.dirPath('/Users/sandracuevas/Documents/Laboratoria/GDL002-md-links')).toBe(true);
+    });
 });
 
 
-describe('findLinks', ()=>{
-  it('is a function', ()=>{  
-    expect(typeof mdLinks.findLinks).toBe('function');
-  });
+describe('mdFile', () => {
+    it('is a function', () => {
+        expect(typeof mdLinks.mdFile).toBe('function');
+    });
 });
-
- 
