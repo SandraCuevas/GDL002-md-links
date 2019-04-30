@@ -1,6 +1,5 @@
 const mdLinks = require('../src/md-links.js');
 
-
 describe('mdLinks', ()=>{
   it('is an object', ()=>{
     expect(typeof mdLinks).toBe('object');

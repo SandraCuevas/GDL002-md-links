@@ -1,40 +1,87 @@
 const fs = require('fs');
-const path = require ('path');
-const http = require('http');
+const path = require('path');
+const pathFile = process.argv[2];
+const mdLinks = require("./index");
+const fileContent = mdLinks(pathFile, null);
 
-let filePath = process.argv[2];
+
+//el campo esta vacío o se ha ingresado algun dato
+function fieldFill (pathFile) {
+  if(pathFile != undefined) {
+      console.log("true");
+      return true
+  }
+  else {
+      return false
+  }
+};
+
+//función para saber si existe la ruta
+function isApath (pathFile) {
+    if(fs.existsSync(pathFile)){
+        console.log("true")
+        return true
+    } else {
+        console.log("false");
+        return false
+    }
+  };
+
+//función para verificar si la ruta es un directorio
+function dirPath (pathFile){
+    if(fs.statSync(pathFile).isDirectory()){
+      return true
+    } else{
+      return false
+    }
+};
+
+//función para saber si tiene una extension MD
+function mdFile (pathFile){
+        if (path.extname(pathFile) === ".md") {
+            return true
+        } else {
+            return false
+        }
+  };
+
+//leer el archivo
+ fileContent.then(
+   (data)=> { // On Success
+    console.log("Links encontrados:");
+    arrLinks(data);
+   },
+   (err)=> { // On Error
+       console.error(err);
+   }
+  );
+
+//función que extrae los links
+function arrLinks(data) {
+    const mdLinkRgEx = /\[(.+?)\]\((.+?\))/g;
+    const mdLinkRgEx2 = /\[(.+?)\]\((.+?)\)/;
+    let allLinks = data.match(mdLinkRgEx);
+    let htmlLinks = [];
+  for (let x in allLinks) {
+    let grpdDta = mdLinkRgEx2.exec(allLinks[x]);
+    let grupoData = {
+        text: grpdDta[1],
+        href: grpdDta[2],
+        file: pathFile
+   };
+    htmlLinks.push(grupoData);
+  }
+    console.log(htmlLinks);
+    console.log(htmlLinks.length);
+    return (htmlLinks);
+
+};
 
 module.exports = {
-  //el usuario ha ingresado una ruta?
-  existPath:(path) => {
-    if(path != undefined){
-      console.log ('Has ingresado una dirección para buscar links');
-      return true;
-    } else{
-      console.log('Debes ingresar una dirección para buscar links');
-      return false;
-    }
-
-  },
-  //verifica que la ruta contiene un .md
-  findMd: (path) => { 
-      if (path.extname(path)== '.md'){
-        return true
-      }else {
-        return false
-      }
-    //reject(err) y resolve(data)
-  },
-
-  readMd:(path) =>{
-    let file = fs.readFileSync(path, 'utf-8');
-    console.log(file);
-    return true;
-    },
-
-  
-  findLinks: () => {
-
-  }
-
+  "fieldFill": fieldFill,
+  "isApath": isApath,
+  "dirPath": dirPath,
+  "mdFile": mdFile,
+  "arrLinks": arrLinks,
+  "fileContent": fileContent,
 };
