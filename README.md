@@ -46,8 +46,5 @@ const mdLinks = require("md-links");
 
 // Caso 1 .- Ruta relativa sin options
 mdLinks("./some/example.md")
-  .then(links => {
-    // => [{ href, text, file }]
-  })
-  .catch(console.error);
+ 
 
