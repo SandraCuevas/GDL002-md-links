@@ -79,10 +79,10 @@ function arrLinks(data) {
 
 
 module.exports = {
-    "fieldFill": fieldFill,
-    "isApath": isApath,
-    "dirPath": dirPath,
-    "mdFile": mdFile,
-    "arrLinks": arrLinks,
-    "fileContent": fileContent,
+    fieldFill,
+    isApath,
+    dirPath,
+    mdFile,
+    arrLinks,
+    fileContent,
 };
